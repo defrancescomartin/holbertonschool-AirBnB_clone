@@ -4,12 +4,12 @@ and deserializes JSON file to instances
 '''
 
 import json
-from os import path
+import os
 from models.base_model import BaseModel
 
 class FileStorage():
     '''creating class'''
-    __file_path = "files.json"
+    __file_path = "file.json"
     __objects = {}
 
     def all(self):
