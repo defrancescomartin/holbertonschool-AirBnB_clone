@@ -12,7 +12,8 @@ Now it’s time to re-create an instance with this dictionary representation.
 import models
 import uuid
 from datetime import datetime
-from models import storage
+import models
+
 
 class BaseModel():
     '''class Base'''
@@ -26,12 +27,12 @@ class BaseModel():
                 if key == "created_at" or key == "updated_at":
                     self.__dict__[key] = datetime.now()
                 else:
-                    self.__dict__[key] = value
+                    setattr(self, key, value)
         
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
-            self.updated_at = self.created_at
-            storage.new()
+            self.updated_at = datetime.now()
+            models.storage.new(self)
 
     def __str__(self):
         '''string representation'''
@@ -40,7 +41,7 @@ class BaseModel():
     def save(self):
         '''update attribute updated_at with current datetime'''
         self.updated_at = datetime.now()
-        storage.save()
+        models.storage.save()
 
     def to_dict(self):
         '''return dict containing all key/value of __dict__ of an instance'''
