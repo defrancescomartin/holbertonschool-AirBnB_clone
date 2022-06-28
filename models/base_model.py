@@ -2,9 +2,7 @@
 '''
 Previously we created a method to generate a dictionary representation of an
 instance (method to_dict()).
-
 Now it’s time to re-create an instance with this dictionary representation.
-
 <class 'BaseModel'> -> to_dict() -> <class 'dict'> -> <class 'BaseModel'>
 '''
 
