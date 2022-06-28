@@ -5,6 +5,7 @@ import cmd
 import models
 from models.base_model import BaseModel
 
+
 class HBNBCommand(cmd.Cmd):
     '''command interpreter'''
 
@@ -29,6 +30,7 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         '''empty line + ENTER shouldn't execute anything'''
         pass
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
