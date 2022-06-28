@@ -5,15 +5,12 @@ and deserializes JSON file to instances
 
 import json
 from os import path
-
+from models.base_model import BaseModel
 
 class FileStorage():
     '''creating class'''
     __file_path = "files.json"
     __objects = {}
-
-    def __init__(self):
-        '''init'''
 
     def all(self):
         '''return a dictionary __objects'''
@@ -21,19 +18,23 @@ class FileStorage():
 
     def new(self, obj):
         '''sets in obj the obj with key'''
-        obj_name = "{obj.__class__.__name__}.{self.id}"
+        obj_name = (f"{obj.__class__.__name__}.{obj.id}")
         self.__objects[obj_name] = obj
 
     def save(self):
         '''serialize __obj to the json file'''
+        new_dic = {}
+        for key, value in self.__objects.items():
+            new_dic[key] = value.to_dict()
         with open(self.__file_path, "w", encoding="utf-8") as f:
-            json.dump(self.__objects, f)
+            json.dump(new_dic, f)
 
     def reload(self):
         '''deserialize json file to __obj'''
-        if path.exists(self.__file_path) is False:
+        if os.path.isfile(self.__file_path) is False:
             return
         else:
             with open(self.__file_path, "r", encoding="utf-8") as f:
-                __objects = json.load(f)
-            return __objects
+                dic = json.load(f)
+                for key, value in dic.items():
+                    self.__objects[key] = eval(value["__class__"])(**value)
