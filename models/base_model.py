@@ -10,7 +10,6 @@ Now it’s time to re-create an instance with this dictionary representation.
 import models
 import uuid
 from datetime import datetime
-import models
 
 
 class BaseModel():
@@ -18,7 +17,7 @@ class BaseModel():
     def __init__(self, *args, **kwargs):
         '''constructor class'''
 
-        if kwargs is not None:
+        if kwargs is not None and len(kwargs) != 0:
             for key, value in kwargs.items():
                 if key == "__class__":
                     continue
@@ -26,7 +25,7 @@ class BaseModel():
                     self.__dict__[key] = datetime.now()
                 else:
                     setattr(self, key, value)
-        
+        else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
