@@ -9,7 +9,7 @@ from os import path
 
 class FileStorage():
     '''creating class'''
-    __file_path = "file.json"
+    __file_path = "files.json"
     __objects = {}
 
     def __init__(self):
@@ -26,15 +26,14 @@ class FileStorage():
 
     def save(self):
         '''serialize __obj to the json file'''
-        with open(file.json, "w", encoding="utf-8") as f:
+        with open(self.__file_path, "w", encoding="utf-8") as f:
             json.dump(self.__objects, f)
 
     def reload(self):
         '''deserialize json file to __obj'''
-        path = "json.file"
-        if path.exists(path) is False:
+        if path.exists(self.__file_path) is False:
             return
         else:
-            with open(path, "r", encoding="utf-8") as f:
+            with open(self.__file_path, "r", encoding="utf-8") as f:
                 __objects = json.load(f)
             return __objects
