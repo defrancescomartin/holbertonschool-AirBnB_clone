@@ -4,6 +4,8 @@
 import cmd
 import models
 from models.base_model import BaseModel
+import json
+from models.engine.file_storage import FileStorage
 
 
 class HBNBCommand(cmd.Cmd):
@@ -45,16 +47,47 @@ class HBNBCommand(cmd.Cmd):
             print(new_inst.id)
             
     def do_show(self, arg):
-        '''print str repr of an inst based on the clss name and id'''
+        '''print str repr of an inst based on the clss name and id
+        FALTA MODIFICAR EL SHOW PARA QUE EL FORMATO DE LA FECHA QUEDE CORRECTO'''
+        filename = "file.json"
+        args = arg.split()
+        new_dic = {}
+        classname = "BaseModel"
+        if len(args) == 0 or args == None or type(args[0]) is not str:
+            print("** class name missing **")
+        elif args[0] != classname:
+            print("** class doesn't exist **")
+        elif len(args) == 1 or args[1] == None:
+            print("** instance id missing **")
+        elif args[0] == classname:
+            with open(filename, "r", encoding="utf-8") as f:
+                new_dic = models.storage.all()
+                for key in new_dic:
+                    if key in new_dic:
+                        print(new_dic[key])
+                    else:
+                        print("** no instance found **")
+
+'''    def do_destroy(self, arg):
+            Deletes an instance based on the class name and id
         args = arg.split()
         classname = "BaseModel"
-        if len(args) == 0 or args == None:
+        filename = "file.json"
+        if len(args) == 0 or args == None or type(args[0]) is not str:
             print("** class name missing **")
-        elif args[0] != "BaseModel":
+        elif args[0] == None or args[0] != classname:
             print("** class doesn't exist **")
-        elif len(args) == 1:
+        elif len(args) == 1 or args[1] == None:
             print("** instance id missing **")
-        elif args[0] == "BaseModel" and args[1] == 
+        elif args[0] == classname and len(args) == 2:
+            with open(filename, "r", encoding="utf-8") as f:
+                new_dic = json.load(f)
+                for key, value in new_dic.items():
+                    id_from_json = key.split('.')
+                    if args[1] == id_from_json[1]:
+'''
+
+
 
 
 if __name__ == '__main__':
