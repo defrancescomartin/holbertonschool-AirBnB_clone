@@ -31,6 +31,21 @@ class HBNBCommand(cmd.Cmd):
         '''empty line + ENTER shouldn't execute anything'''
         pass
 
+    def do_create(self, arg):
+        '''function that creates a new instance of BM, save it and print it'''
+        args = arg.split()
+        classname = "BaseModel"
+        if len(args) == 0 or args == None or args == "":
+            print("** class name missing **")
+        elif args[0] != "BaseModel":
+            print("** class doesn't exist **")
+        elif args[0] == "BaseModel":
+            new_inst = eval(classname)()
+            new_inst.save()
+            print(new_inst.id)
+            
+
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
