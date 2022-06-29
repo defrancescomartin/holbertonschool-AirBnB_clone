@@ -44,7 +44,17 @@ class HBNBCommand(cmd.Cmd):
             new_inst.save()
             print(new_inst.id)
             
-
+    def do_show(self, arg):
+        '''print str repr of an inst based on the clss name and id'''
+        args = arg.split()
+        classname = "BaseModel"
+        if len(args) == 0 or args == None:
+            print("** class name missing **")
+        elif args[0] != "BaseModel":
+            print("** class doesn't exist **")
+        elif len(args) == 1:
+            print("** instance id missing **")
+        elif args[0] == "BaseModel" and args[1] == 
 
 
 if __name__ == '__main__':
