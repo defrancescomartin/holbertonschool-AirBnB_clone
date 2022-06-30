@@ -45,10 +45,9 @@ class HBNBCommand(cmd.Cmd):
             new_inst = eval(classname)()
             new_inst.save()
             print(new_inst.id)
-            
+
     def do_show(self, arg):
-        '''print str repr of an inst based on the clss name and id
-        FALTA MODIFICAR EL SHOW PARA QUE EL FORMATO DE LA FECHA QUEDE CORRECTO'''
+        '''print str repr of an inst based on the clss name and id'''
         filename = "file.json"
         args = arg.split()
         new_dic = {}
@@ -60,16 +59,17 @@ class HBNBCommand(cmd.Cmd):
         elif len(args) == 1 or args[1] == None:
             print("** instance id missing **")
         elif args[0] == classname:
-            with open(filename, "r", encoding="utf-8") as f:
-                new_dic = models.storage.all()
-                for key in new_dic:
-                    if key in new_dic:
-                        print(new_dic[key])
-                    else:
-                        print("** no instance found **")
+            new_dic = models.storage.all()
+            key = f"{args[0]}.{args[1]}"
+            for k in new_dic:
+                if key in new_dic:
+                    print(new_dic[key])
+                else:
+                    print("** no instance found **")
 
-'''    def do_destroy(self, arg):
-            Deletes an instance based on the class name and id
+
+    def do_destroy(self, arg):
+        '''Deletes an instance based on the class name and id'''
         args = arg.split()
         classname = "BaseModel"
         filename = "file.json"
@@ -80,13 +80,12 @@ class HBNBCommand(cmd.Cmd):
         elif len(args) == 1 or args[1] == None:
             print("** instance id missing **")
         elif args[0] == classname and len(args) == 2:
-            with open(filename, "r", encoding="utf-8") as f:
-                new_dic = json.load(f)
-                for key, value in new_dic.items():
-                    id_from_json = key.split('.')
-                    if args[1] == id_from_json[1]:
-'''
-
+            new_dic = models.storage.all()
+            key = f"{args[0]}.{args[1]}"
+            for k in new_dic:
+                if key in new_dic:
+                    del 
+            
 
 
 
