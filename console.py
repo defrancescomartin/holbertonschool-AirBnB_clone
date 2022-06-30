@@ -84,10 +84,12 @@ class HBNBCommand(cmd.Cmd):
             key_id = f"{args[0]}.{args[1]}"
             with open(filename, "r") as f:
                 data_to_read = json.load(f)
+                data_to_delete = data_to_read.copy()
             with open(filename, "w") as j:
-                for key, value in data_to_read:
+                for key, value in data_to_read.items():
                     if key_id == key:
-                        del data_to_read[key]
+                        del data_to_delete[key]
+                        json.dump(data_to_delete, j)
                     else:
                         print("** no instance found **")
 
