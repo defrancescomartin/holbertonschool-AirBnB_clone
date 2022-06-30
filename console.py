@@ -104,21 +104,22 @@ class HBNBCommand(cmd.Cmd):
         '''function that returns a str repr of all instances'''
         classname = "BaseModel"
         args = arg.split()
-        a = "["
-        b = "]"
+        data_instances = []
         if len(args) == 0:
             data = models.storage.all()
             for key, value in data.items():
-                print(f"{a}\"{str(data[key])}\"{b}") 
+                data_to_show = f"{str(data[key])}"
+                data_instances.append(data_to_show)
         elif args[0] != classname and len(args) == 1:
             print("** class doesn't exist **")
             return
         elif args[0] == classname:
             data = models.storage.all()
             for key, value in data.items():
-                print(f"{a}\"{str(data[key])}\"{b}")
+                data_to_show = f"{str(data[key])}"
+                data_instances.append(data_to_show)
 
-
+        print(data_instances)
 
 
 if __name__ == '__main__':
