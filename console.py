@@ -61,11 +61,10 @@ class HBNBCommand(cmd.Cmd):
         elif args[0] == classname:
             new_dic = models.storage.all()
             key = f"{args[0]}.{args[1]}"
-            for k in new_dic:
-                if key in new_dic:
-                    print(new_dic[key])
-                else:
-                    print("** no instance found **")
+            if key in new_dic:
+                print(new_dic[key])
+            else:
+                print("** no instance found **")
 
 
     def do_destroy(self, arg):
