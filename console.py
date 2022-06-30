@@ -82,10 +82,15 @@ class HBNBCommand(cmd.Cmd):
         elif args[0] == classname and len(args) == 2:
             new_dic = models.storage.all()
             key = f"{args[0]}.{args[1]}"
-            for k in new_dic:
-                if key in new_dic:
-                    del 
-            
+            with open(filename, "r") as f:
+                data_to_read = json.load(f)
+            with open(filename, "w") as j:
+                data_to_delete = json.dump(j)
+                for k in data_to_read:
+                    if key in data_to_read:
+                        del data_to_delete
+                    else:
+                        print("** no instance found **")
 
 
 
