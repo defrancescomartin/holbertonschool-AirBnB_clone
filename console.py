@@ -137,6 +137,9 @@ class HBNBCommand(cmd.Cmd):
             if checker == 0:
                 print("** no instance found **")
 
+        if len(args) == 3:
+            print("** value missing **")
+
 
 
     
