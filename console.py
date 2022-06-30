@@ -74,23 +74,24 @@ class HBNBCommand(cmd.Cmd):
         classname = "BaseModel"
         filename = "file.json"
         checker = 0
-        if len(args) == 0 or args == None or type(args[0]) is not str:
+        if len(args) == 0:
             print("** class name missing **")
-        if args[0] == None or args[0] != classname:
+        if len(args) == 1 and args[0] != clasname:
             print("** class doesn't exist **")
-        if len(args) == 1 or args[1] == None:
+        if len(args) == 1:
             print("** instance id missing **")
-        if os.path.isfile(filename) is True:
-            new_dic = models.storage.all()
-            dic_copy = new_dic.copy()
-            key_id = f"{args[0]}.{args[1]}"
-            for key, value in dic_copy.items():
-                if key_id == key:
-                    del new_dic[key]
-                    models.storage.save()
-                    checker = 1
-        if checker == 0:
-            print("** no instance found **")
+        if len(args) == 3:
+            if os.path.isfile(filename) is True:
+                new_dic = models.storage.all()
+                dic_copy = new_dic.copy()
+                key_id = f"{args[0]}.{args[1]}"
+                for key, value in dic_copy.items():
+                    if key_id == key:
+                        del new_dic[key]
+                        models.storage.save()
+                        checker = 1
+            if checker == 0:
+                print("** no instance found **")
 
         
 
@@ -111,7 +112,7 @@ class HBNBCommand(cmd.Cmd):
             for key, value in data.items():
                 data_to_show = f"{str(data[key])}"
                 data_instances.append(data_to_show)
-        print(data_instances)
+            print(data_instances)
 
 
     def do_update(self, arg):
@@ -120,26 +121,47 @@ class HBNBCommand(cmd.Cmd):
         classname = "BaseModel"
         checker = 0
 
-        if len(args) == 0:
-            print("** class name missing **")
-        if len(args) == 1:
-            if args[0] == classname:
-                print("** instance id missing **")
-            else:
-                print("** class doesn't exist **")
-        if len(args) == 2:
+        if len(args) < 4:
+            if len(args) == 0:
+                print("** class name missing **")
+            if len(args) == 1:
+                if args[0] == classname:
+                    print("** instance id missing **")
+                else:
+                    print("** class doesn't exist **")
+            if len(args) == 2:
+                data = models.storage.all()
+                key_id = f"{args[0]}.{args[1]}"
+                for key, value in data.items():
+                    if key_id == key:
+                        print("** attribute name missing **")
+                        checker = 1
+                if checker == 0:
+                    print("** no instance found **")
+            if len(args) == 3:
+                print("** value missing **")
+        if len(args) == 4:
             data = models.storage.all()
             key_id = f"{args[0]}.{args[1]}"
             for key, value in data.items():
                 if key_id == key:
-                    print("** attribute name missing **")
-                    checker = 1
-            if checker == 0:
-                print("** no instance found **")
-
-        if len(args) == 3:
-            print("** value missing **")
-
+                    if args[3] == key:
+                        setattr(value, args[2], args[3])
+                        models.storage.save()
+                    else:
+                        setattr(value, args[2], args[3])
+                        models.storage.save()
+        elif len(args) > 4:
+            data = models.storage.all()
+            key_id = f"{args[0]}.{args[1]}"
+            for key, value in data.items():
+                if key_id == key:
+                    if args[3] == key:
+                        setattr(value, args[2], args[3])
+                        models.storage.save()
+                    else:
+                        setattr(value, args[2], args[3])
+                        models.storage.save()
 
 
     
