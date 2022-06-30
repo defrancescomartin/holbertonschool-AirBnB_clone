@@ -76,6 +76,7 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split()
         classname = "BaseModel"
         filename = "file.json"
+        checker = 0
         if len(args) == 0 or args == None or type(args[0]) is not str:
             print("** class name missing **")
             return
@@ -93,8 +94,9 @@ class HBNBCommand(cmd.Cmd):
                 if key_id == key:
                     del new_dic[key]
                     models.storage.save()
-                else:
-                    print("** no instance found **")
+                    checker = 1
+        if checker == 0:
+            print("** no instance found **")
 
 
 
