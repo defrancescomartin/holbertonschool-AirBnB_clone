@@ -118,8 +118,17 @@ class HBNBCommand(cmd.Cmd):
             for key, value in data.items():
                 data_to_show = f"{str(data[key])}"
                 data_instances.append(data_to_show)
-
         print(data_instances)
+
+
+    def to_update(self, arg):
+        '''Update an instance based on cls name and id and add new attr'''
+        args = arg.split()
+        classname = "BaseModel"
+        if len(args) == 0 or args[0] is None:
+            print("** class name missing **")
+
+
 
 
 if __name__ == '__main__':
