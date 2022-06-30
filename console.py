@@ -6,6 +6,7 @@ import models
 from models.base_model import BaseModel
 import json
 from models.engine.file_storage import FileStorage
+import os
 
 
 class HBNBCommand(cmd.Cmd):
@@ -50,20 +51,23 @@ class HBNBCommand(cmd.Cmd):
         '''print str repr of an inst based on the clss name and id'''
         filename = "file.json"
         args = arg.split()
-        new_dic = {}
         classname = "BaseModel"
         if len(args) == 0 or args == None or type(args[0]) is not str:
             print("** class name missing **")
-        elif args[0] != classname:
+            return
+        if args[0] != classname:
             print("** class doesn't exist **")
-        elif len(args) == 1 or args[1] == None:
+            return
+        if len(args) == 1 or args[1] == None:
             print("** instance id missing **")
-        elif args[0] == classname:
-            new_dic = models.storage.all()
+            return
+        else:
+            data = models.storage.all()
             key = f"{args[0]}.{args[1]}"
-            if key in new_dic:
-                print(new_dic[key])
-            else:
+            for key, value in data.items():
+                if key in data:
+                    print(data[key])
+            if key not in data:
                 print("** no instance found **")
 
 
@@ -74,23 +78,23 @@ class HBNBCommand(cmd.Cmd):
         filename = "file.json"
         if len(args) == 0 or args == None or type(args[0]) is not str:
             print("** class name missing **")
-        elif args[0] == None or args[0] != classname:
+            return
+        if args[0] == None or args[0] != classname:
             print("** class doesn't exist **")
-        elif len(args) == 1 or args[1] == None:
+            return
+        if len(args) == 1 or args[1] == None:
             print("** instance id missing **")
-        elif args[0] == classname and len(args) == 2:
+            return
+        if os.path.isfile(filename) is True:
             new_dic = models.storage.all()
+            dic_copy = new_dic.copy()
             key_id = f"{args[0]}.{args[1]}"
-            with open(filename, "r") as f:
-                data_to_read = json.load(f)
-                data_to_delete = data_to_read.copy()
-            with open(filename, "w") as j:
-                for key, value in data_to_read.items():
-                    if key_id == key:
-                        del data_to_delete[key]
-                        json.dump(data_to_delete, j)
-                    else:
-                        print("** no instance found **")
+            for key, value in dic_copy.items():
+                if key_id == key:
+                    del new_dic[key]
+                    models.storage.save()
+                else:
+                    print("** no instance found **")
 
 
 
