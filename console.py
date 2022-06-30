@@ -54,13 +54,10 @@ class HBNBCommand(cmd.Cmd):
         classname = "BaseModel"
         if len(args) == 0 or args == None or type(args[0]) is not str:
             print("** class name missing **")
-            return
         if args[0] != classname:
             print("** class doesn't exist **")
-            return
         if len(args) == 1 or args[1] == None:
             print("** instance id missing **")
-            return
         else:
             data = models.storage.all()
             key = f"{args[0]}.{args[1]}"
@@ -79,13 +76,10 @@ class HBNBCommand(cmd.Cmd):
         checker = 0
         if len(args) == 0 or args == None or type(args[0]) is not str:
             print("** class name missing **")
-            return
         if args[0] == None or args[0] != classname:
             print("** class doesn't exist **")
-            return
         if len(args) == 1 or args[1] == None:
             print("** instance id missing **")
-            return
         if os.path.isfile(filename) is True:
             new_dic = models.storage.all()
             dic_copy = new_dic.copy()
@@ -112,7 +106,6 @@ class HBNBCommand(cmd.Cmd):
                 data_instances.append(data_to_show)
         elif args[0] != classname and len(args) == 1:
             print("** class doesn't exist **")
-            return
         elif args[0] == classname:
             data = models.storage.all()
             for key, value in data.items():
@@ -121,15 +114,31 @@ class HBNBCommand(cmd.Cmd):
         print(data_instances)
 
 
-    def to_update(self, arg):
+    def do_update(self, arg):
         '''Update an instance based on cls name and id and add new attr'''
         args = arg.split()
         classname = "BaseModel"
-        if len(args) == 0 or args[0] is None:
+        checker = 0
+
+        if len(args) == 0:
             print("** class name missing **")
+        if len(args) == 1:
+            if args[0] == classname:
+                print("** instance id missing **")
+            else:
+                print("** class doesn't exist **")
+        if len(args) == 2:
+            data = models.storage.all()
+            key_id = f"{args[0]}.{args[1]}"
+            for key, value in data.items():
+                if key_id == key:
+                    print("** attribute name missing **")
+                    checker = 1
+            if checker == 0:
+                print("** no instance found **")
 
 
 
-
+    
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
