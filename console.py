@@ -98,6 +98,27 @@ class HBNBCommand(cmd.Cmd):
         if checker == 0:
             print("** no instance found **")
 
+        
+
+    def do_all(self, arg):
+        '''function that returns a str repr of all instances'''
+        classname = "BaseModel"
+        args = arg.split()
+        a = "["
+        b = "]"
+        if len(args) == 0:
+            data = models.storage.all()
+            for key, value in data.items():
+                print(f"{a}\"{str(data[key])}\"{b}") 
+        elif args[0] != classname and len(args) == 1:
+            print("** class doesn't exist **")
+            return
+        elif args[0] == classname:
+            data = models.storage.all()
+            for key, value in data.items():
+                print(f"{a}\"{str(data[key])}\"{b}")
+
+
 
 
 if __name__ == '__main__':
