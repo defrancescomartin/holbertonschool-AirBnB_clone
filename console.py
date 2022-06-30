@@ -80,7 +80,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         if len(args) == 1:
             print("** instance id missing **")
-        if len(args) == 3:
+        if len(args) == 2:
             if os.path.isfile(filename) is True:
                 new_dic = models.storage.all()
                 dic_copy = new_dic.copy()
@@ -90,10 +90,9 @@ class HBNBCommand(cmd.Cmd):
                         del new_dic[key]
                         models.storage.save()
                         checker = 1
-            if checker == 0:
-                print("** no instance found **")
-
-        
+                if checker == 0:
+                    print("** no instance found **")
+ 
 
     def do_all(self, arg):
         '''function that returns a str repr of all instances'''
