@@ -16,8 +16,9 @@ from models.review import Review
 
 
 all_classes = {"BaseModel": BaseModel, "User": User, "State": State,
-                "City": City, "Amenity": Amenity, "Place": Place,
-                "Review": Review}
+               "City": City, "Amenity": Amenity, "Place": Place,
+               "Review": Review}
+
 
 class HBNBCommand(cmd.Cmd):
     '''command interpreter'''
@@ -48,7 +49,7 @@ class HBNBCommand(cmd.Cmd):
         '''function that creates a new instance of BM, save it and print it'''
         args = arg.split()
         classname = "BaseModel"
-        if len(args) == 0 or args == None or args == "":
+        if len(args) == 0 or args is None or args == "":
             print("** class name missing **")
         if args[0] in all_classes:
             new_inst = all_classes[args[0]]()
@@ -61,7 +62,6 @@ class HBNBCommand(cmd.Cmd):
     def do_show(self, arg):
         '''print str repr of an inst based on the clss name and id'''
         args = arg.split()
-        classname = "BaseModel"
         if len(args) == 0:
             print("** class name missing **")
             return False
@@ -76,34 +76,27 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("** instance id missing **")
         else:
-            print("** class doesn't exist **") 
-
+            print("** class doesn't exist **")
 
     def do_destroy(self, arg):
         '''Deletes an instance based on the class name and id'''
         args = arg.split()
-        classname = "BaseModel"
-        filename = "file.json"
-        checker = 0
         if len(args) == 0:
             print("** class name missing **")
-        if len(args) == 1 and args[0] != clasname:
-            print("** class doesn't exist **")
-        if len(args) == 1:
-            print("** instance id missing **")
-        if len(args) == 2:
-            if os.path.isfile(filename) is True:
-                new_dic = models.storage.all()
-                dic_copy = new_dic.copy()
-                key_id = f"{args[0]}.{args[1]}"
-                for key, value in dic_copy.items():
-                    if key_id == key:
-                        del new_dic[key]
-                        models.storage.save()
-                        checker = 1
-                if checker == 0:
+            return False
+        if args[0] in all_classes:
+            if len(args) > 1:
+                key = f"{args[0]}.{args[1]}"
+                data = models.storage.all()
+                if key in data:
+                    data.pop(key)
+                    models.storage.save()
+                else:
                     print("** no instance found **")
- 
+            else:
+                print("** instance id missing **")
+        else:
+            print("** class doesn't exist **")
 
     def do_all(self, arg):
         '''function that returns a str repr of all instances'''
@@ -124,7 +117,6 @@ class HBNBCommand(cmd.Cmd):
                 data_to_show = f"{str(data[key])}"
                 data_instances.append(data_to_show)
             print(data_instances)
-
 
     def do_update(self, arg):
         '''Update an instance based on cls name and id and add new attr'''
@@ -175,6 +167,5 @@ class HBNBCommand(cmd.Cmd):
                         models.storage.save()
 
 
-    
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
