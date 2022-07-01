@@ -101,20 +101,19 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, arg):
         '''function that returns a str repr of all instances'''
         args = arg.split()
+        data = models.storage.all()
         data_instances = []
+
         if len(args) == 0:
-            data = models.storage.all()
             for key, value in data.items():
-                data_to_show = f"{str(data[key])}"
-                data_instances.append(data_to_show)
+                data_instances.append(str(value))
             print(data_instances)
         elif args[0] not in all_classes and len(args) == 1:
-            print("** class doesn't exist **")
-        elif args[0] in all_classes:
-            data = models.storage.all()
+            print(" class doesn't exist ")
+        else:
             for key, value in data.items():
-                data_to_show = f"{str(data[key])}"
-                data_instances.append(data_to_show)
+                if args[0] in key:
+                    data_instances.append(str(value))
             print(data_instances)
 
     def do_update(self, arg):
