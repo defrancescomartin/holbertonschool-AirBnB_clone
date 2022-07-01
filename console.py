@@ -43,8 +43,8 @@ class HBNBCommand(cmd.Cmd):
         if len(args) == 0 or args == None or args == "":
             print("** class name missing **")
         if args[0] in all_classes:
-            new_inst = all_classes[command[0]]()
-        else
+            new_inst = all_classes[args[0]]()
+        else:
             print("** class doesn't exist **")
             return False
         print(new_inst.id)
@@ -52,23 +52,23 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, arg):
         '''print str repr of an inst based on the clss name and id'''
-        filename = "file.json"
         args = arg.split()
         classname = "BaseModel"
-        if len(args) == 0 or args == None or type(args[0]) is not str:
+        if len(args) == 0:
             print("** class name missing **")
-        if args[0] != classname:
-            print("** class doesn't exist **")
-        if len(args) == 1 or args[1] == None:
-            print("** instance id missing **")
-        else:
-            data = models.storage.all()
-            key = f"{args[0]}.{args[1]}"
-            for key, value in data.items():
+            return False
+        if args[0] == classname:
+            if len(args) > 1:
+                key = f"{args[0]}.{args[1]}"
+                data = models.storage.all()
                 if key in data:
                     print(data[key])
-            if key not in data:
-                print("** no instance found **")
+                else:
+                    print("** no instance found **")
+            else:
+                print("** instance id missing **")
+        else:
+            print("** class doesn't exist **") 
 
 
     def do_destroy(self, arg):
@@ -107,6 +107,7 @@ class HBNBCommand(cmd.Cmd):
             for key, value in data.items():
                 data_to_show = f"{str(data[key])}"
                 data_instances.append(data_to_show)
+            print(data_instances)
         elif args[0] != classname and len(args) == 1:
             print("** class doesn't exist **")
         elif args[0] == classname:
