@@ -60,3 +60,59 @@ $
 ```
 
 All tests should also pass in non-interactive mode: `$ echo "python3 -m unittest discover tests" | bash`
+
+## Usage examples
+** Launch the console **
+```
+$ ./console.py
+(hbnb) 
+```
+
+** Creating a new object **
+```
+(hbnh) create
+** class name missing **
+(hbnb) create User
+796d8678-df45-4a62-ba97-082ff116b4fd
+```
+
+** Show an object **
+```
+(hbnb) show User
+** instance not found **
+(hbnb) show User 796d8678-df45-4a62-ba97-082ff116b4fd
+[User] (796d8678-df45-4a62-ba97-082ff116b4fd) {'id': '796d8678-df45-4a62-ba97-082ff116b4fd', 'created_at': datetime.datetime(2022, 7, 1, 13, 36, 48, 407416), 'updated_at': datetime.datetime(2022, 7, 1, 13, 36, 48, 407527)}
+```
+
+** Update an object **
+```
+(hbnb) update
+** class name missing **
+(hbnb) update User
+** instance id missing **
+(hbnb) update User 796d8678-df45-4a62-ba97-082ff116b4fd
+** attribute name missing **
+(hbnb) update User 7b8c7a8b-f45a-4484-b6e2-aaed70cdac61 name Javi
+(hbnb) all
+["[User] (796d8678-df45-4a62-ba97-082ff116b4fd) {'id': '796d8678-df45-4a62-ba97-082ff116b4fd', 'created_at': datetime.datetime(2022, 7, 1, 13, 40, 8, 489607), 'updated_at': datetime.datetime(2022, 7, 1, 13, 40, 8, 489622)}", "[User] (1fa18511-0fea-4a3c-a424-cea1f8ee01cc) {'id': '1fa18511-0fea-4a3c-a424-cea1f8ee01cc', 'created_at': datetime.datetime(2022, 7, 1, 13, 40, 17, 45444), 'updated_at': datetime.datetime(2022, 7, 1, 13, 40, 17, 45560), 'name': 'Javi'}"]
+```
+
+** Destroy an object **
+```
+(hbnb) destroy
+** class name missing **
+(hbnb) destroy User
+** instance id missing **
+(hbnb) destroy User 796d8678-df45-4a62-ba97-082ff116b4fd
+(hbnb)
+```
+
+** Exit the console **
+```
+(hbnb) quit
+defrancescomartin@LAPTOP-RFLPL88P:~/holbertonschool-AirBnB_clone$
+```
+
+## Authors
+* Mateo Arbini - [LinkedIn](https://www.linkedin.com/in/mateo-arbini-1493691a8/)
+* Martin De Francesco - [LinkedIn](https://www.linkedin.com/in/martin-de-francesco-ivagnes-640a181b3/)
