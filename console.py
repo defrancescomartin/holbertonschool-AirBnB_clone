@@ -7,7 +7,9 @@ from models.base_model import BaseModel
 import json
 from models.engine.file_storage import FileStorage
 import os
+from models.user import User
 
+all_classes = {"BaseModel": BaseModel, "User": User}
 
 class HBNBCommand(cmd.Cmd):
     '''command interpreter'''
@@ -40,12 +42,13 @@ class HBNBCommand(cmd.Cmd):
         classname = "BaseModel"
         if len(args) == 0 or args == None or args == "":
             print("** class name missing **")
-        elif args[0] != "BaseModel":
+        if args[0] in all_classes:
+            new_inst = all_classes[command[0]]()
+        else
             print("** class doesn't exist **")
-        elif args[0] == "BaseModel":
-            new_inst = eval(classname)()
-            new_inst.save()
-            print(new_inst.id)
+            return False
+        print(new_inst.id)
+        new_inst.save()
 
     def do_show(self, arg):
         '''print str repr of an inst based on the clss name and id'''
