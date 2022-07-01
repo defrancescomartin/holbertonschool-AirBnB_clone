@@ -62,13 +62,13 @@ $
 All tests should also pass in non-interactive mode: `$ echo "python3 -m unittest discover tests" | bash`
 
 ## Usage examples
-** Launch the console **
+**Launch the console**
 ```
 $ ./console.py
 (hbnb) 
 ```
 
-** Creating a new object **
+**Creating a new object**
 ```
 (hbnh) create
 ** class name missing **
@@ -76,7 +76,7 @@ $ ./console.py
 796d8678-df45-4a62-ba97-082ff116b4fd
 ```
 
-** Show an object **
+**Show an object**
 ```
 (hbnb) show User
 ** instance not found **
@@ -84,7 +84,7 @@ $ ./console.py
 [User] (796d8678-df45-4a62-ba97-082ff116b4fd) {'id': '796d8678-df45-4a62-ba97-082ff116b4fd', 'created_at': datetime.datetime(2022, 7, 1, 13, 36, 48, 407416), 'updated_at': datetime.datetime(2022, 7, 1, 13, 36, 48, 407527)}
 ```
 
-** Update an object **
+**Update an object**
 ```
 (hbnb) update
 ** class name missing **
@@ -97,7 +97,7 @@ $ ./console.py
 ["[User] (796d8678-df45-4a62-ba97-082ff116b4fd) {'id': '796d8678-df45-4a62-ba97-082ff116b4fd', 'created_at': datetime.datetime(2022, 7, 1, 13, 40, 8, 489607), 'updated_at': datetime.datetime(2022, 7, 1, 13, 40, 8, 489622)}", "[User] (1fa18511-0fea-4a3c-a424-cea1f8ee01cc) {'id': '1fa18511-0fea-4a3c-a424-cea1f8ee01cc', 'created_at': datetime.datetime(2022, 7, 1, 13, 40, 17, 45444), 'updated_at': datetime.datetime(2022, 7, 1, 13, 40, 17, 45560), 'name': 'Javi'}"]
 ```
 
-** Destroy an object **
+**Destroy an object**
 ```
 (hbnb) destroy
 ** class name missing **
@@ -107,7 +107,7 @@ $ ./console.py
 (hbnb)
 ```
 
-** Exit the console **
+**Exit the console**
 ```
 (hbnb) quit
 defrancescomartin@LAPTOP-RFLPL88P:~/holbertonschool-AirBnB_clone$
