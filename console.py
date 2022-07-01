@@ -119,17 +119,15 @@ class HBNBCommand(cmd.Cmd):
     def do_update(self, arg):
         '''Update an instance based on cls name and id and add new attr'''
         args = arg.split()
-        classname = "BaseModel"
         checker = 0
 
         if len(args) < 4:
             if len(args) == 0:
                 print("** class name missing **")
             if len(args) == 1:
-                if args[0] == classname:
-                    print("** instance id missing **")
-                else:
-                    print("** class doesn't exist **")
+                print("** instance id missing **")
+            else:
+                print("** class doesn't exist **")
             if len(args) == 2:
                 data = models.storage.all()
                 key_id = f"{args[0]}.{args[1]}"
@@ -164,6 +162,27 @@ class HBNBCommand(cmd.Cmd):
                         setattr(value, args[2], args[3])
                         models.storage.save()
 
+    def do_count(self, arg):
+        ''' Count and return the number of instances of a class'''
+        if arg in all_classes:
+            i = 0
+            data = models.storage.all()
+            for key, value in data.items():
+                if arg in key:
+                    i = i + 1
+            print(i)
+        else:
+            print ("** class doesn't exist **")
+
+    def default(self, arg):
+        delimiter = arg.split(".")
+        class_part = delimiter[0]
+        function = delimiter[1]
+
+        if class_part in all_classes and function == "all()":
+            HBNBCommand.do_all(self, class_part)
+        elif class_part in all_classes and function == "count()":
+            HBNBCommand.do_count(self, class_part)
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
