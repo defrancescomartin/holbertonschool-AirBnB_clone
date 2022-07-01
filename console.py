@@ -172,7 +172,7 @@ class HBNBCommand(cmd.Cmd):
                     i = i + 1
             print(i)
         else:
-            print ("** class doesn't exist **")
+            print("** class doesn't exist **")
 
     def default(self, arg):
         delimiter = arg.split(".")
@@ -183,6 +183,7 @@ class HBNBCommand(cmd.Cmd):
             HBNBCommand.do_all(self, class_part)
         elif class_part in all_classes and function == "count()":
             HBNBCommand.do_count(self, class_part)
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
