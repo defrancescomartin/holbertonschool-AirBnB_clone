@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-'''class User that inherits from BaseModel'''
+'''class User that inherit from BaseModel'''
 
 from models.base_model import BaseModel
 
