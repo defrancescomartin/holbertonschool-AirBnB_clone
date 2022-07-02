@@ -29,7 +29,7 @@ class TestState(unittest.TestCase):
         '''method to check for id'''
         Canelones = State()
         Maldonado = State()
-        self.assertNotEqual(Montevideo.id, Maldonado.id)
+        self.assertNotEqual(Canelones.id, Maldonado.id)
 
     def test_creationofinstance(self):
         '''method to check the creation of the instance'''

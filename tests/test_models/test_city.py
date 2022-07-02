@@ -12,7 +12,7 @@ class TestCity(unittest.TestCase):
 
     def test_doc(self):
         '''method to check if it has documentation'''
-        self.assertIsNotNone(State.__doc__)
+        self.assertIsNotNone(City.__doc__)
 
     def test_subclass(self):
         '''method to check subclasses'''
@@ -47,12 +47,12 @@ class TestCity(unittest.TestCase):
         self.assertTrue("name" in example.__dict__)
         self.assertFalse("location" in example.__dict__)
 
-    def test_cityid(self):
+    def test_stateid(self):
         '''method to check attr id'''
         example1 = City()
-        example1.id = "ParquedelPlata"
+        example1.state_id = "ParquedelPlata"
         self.assertTrue(type(example1.id), str)
-        self.assertTrue("id" in example1.__dict__)
+        self.assertTrue("state_id" in example1.__dict__)
 
 
 if __name__ == "__main__":
