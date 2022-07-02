@@ -1,6 +1,6 @@
 #!usr/bin/python3
 
-''' Module tests/test_models/test/engine/test_file_storage'''
+''' Module tests/test_models/test_engine/test_file_storage'''
 
 import unittest
 from models.engine.file_storage import FileStorage
