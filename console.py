@@ -190,6 +190,12 @@ class HBNBCommand(cmd.Cmd):
             id_ke = id_k[:-1]
             argument = class_part + " " + id_ke
             HBNBCommand.do_show(self, argument)
+        elif class_part in all_classes and "destroy" in function:
+            id_key = function.split("(")
+            id_k = id_key[1]
+            id_ke = id_k[:-1]
+            argument = class_part + " " + id_ke
+            HBNBCommand.do_destroy(self, argument)
 
 
 if __name__ == '__main__':
