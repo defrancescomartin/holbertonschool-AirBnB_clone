@@ -3,6 +3,7 @@
 '''class User that inherit from BaseModel'''
 
 from models.base_model import BaseModel
+import models
 
 
 class User(BaseModel):
