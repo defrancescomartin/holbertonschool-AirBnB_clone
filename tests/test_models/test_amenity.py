@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 import unittest
-from models.state import Amenity
+from models.amenity import Amenity
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 import models
@@ -17,13 +17,12 @@ class TestAmenity(unittest.TestCase):
     def test_subclass(self):
         '''method to check subclasses'''
         self.assertEqual(issubclass(Amenity, BaseModel), True)
-        self.assertEqual(issubclass(Amenity, basemodel), False)
+        self.assertEqual(issubclass(Amenity, FileStorage), False)
 
     def test_instance(self):
         '''method to check for instances'''
         Amenity_1 = Amenity()
         self.assertEqual(isinstance(Amenity_1, Amenity), True)
-        self.assertEqual(isinstance(Amenity_1, amenity), False)
 
     def test_id(self):
         '''method to check for id'''

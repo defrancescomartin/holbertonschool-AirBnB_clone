@@ -17,13 +17,12 @@ class TestState(unittest.TestCase):
     def test_subclass(self):
         '''method to check subclasses'''
         self.assertEqual(issubclass(State, BaseModel), True)
-        self.assertEqual(issubclass(State, basemodel), False)
+        self.assertEqual(issubclass(State, FileStorage), False)
 
     def test_instance(self):
         '''method to check for instances'''
         Montevideo = State()
         self.assertEqual(isinstance(Montevideo, State), True)
-        self.assertEqual(isinstance(Montevideo, state), False)
 
     def test_id(self):
         '''method to check for id'''

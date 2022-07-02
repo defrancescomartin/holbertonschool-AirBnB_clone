@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 import unittest
-from models.state import Place
+from models.place import Place
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 import models
@@ -17,13 +17,12 @@ class TestPlace(unittest.TestCase):
     def test_subclass(self):
         '''method to check subclasses'''
         self.assertEqual(issubclass(Place, BaseModel), True)
-        self.assertEqual(issubclass(Place, basemodel), False)
+        self.assertEqual(issubclass(Place, FileStorage), False)
 
     def test_instance(self):
         '''method to check for instances'''
-        palce_1 = Place()
+        place_1 = Place()
         self.assertEqual(isinstance(place_1, Place), True)
-        self.assertEqual(isinstance(place_1, place), False)
 
     def test_id(self):
         '''method to check for id'''

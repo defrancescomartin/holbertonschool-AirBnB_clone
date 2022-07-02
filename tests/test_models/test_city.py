@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 import unittest
-from models.state import City
+from models.city import City
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 import models
@@ -17,13 +17,12 @@ class TestCity(unittest.TestCase):
     def test_subclass(self):
         '''method to check subclasses'''
         self.assertEqual(issubclass(City, BaseModel), True)
-        self.assertEqual(issubclass(City, basemodel), False)
+        self.assertEqual(issubclass(City, FileStorage), False)
 
     def test_instance(self):
         '''method to check for instances'''
         Montevideo = City()
         self.assertEqual(isinstance(Montevideo, City), True)
-        self.assertEqual(isinstance(Montevideo, city), False)
 
     def test_id(self):
         '''method to check for id'''

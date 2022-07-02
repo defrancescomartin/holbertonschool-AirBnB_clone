@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 import unittest
-from models.state import Review
+from models.review import Review
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 import models
@@ -17,13 +17,12 @@ class TestReview(unittest.TestCase):
     def test_subclass(self):
         '''method to check subclasses'''
         self.assertEqual(issubclass(Review, BaseModel), True)
-        self.assertEqual(issubclass(Review, basemodel), False)
+        self.assertEqual(issubclass(Review, FileStorage), False)
 
     def test_instance(self):
         '''method to check for instances'''
         review_1 = Review()
         self.assertEqual(isinstance(review_1, Review), True)
-        self.assertEqual(isinstance(review_1, review), False)
 
     def test_id(self):
         '''method to check for id'''
@@ -52,7 +51,7 @@ class TestReview(unittest.TestCase):
         example1 = Review()
         example1.place_id = "ParquedelPlata"
         self.assertTrue(type(example1.place_id), str)
-        self.assertTrue("palce_id" in example1.__dict__)
+        self.assertTrue("place_id" in example1.__dict__)
 
     def test_userid(self):
         '''method to check attr id'''
