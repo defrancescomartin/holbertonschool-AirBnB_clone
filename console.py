@@ -196,6 +196,20 @@ class HBNBCommand(cmd.Cmd):
             id_ke = id_k[:-1]
             argument = class_part + " " + id_ke
             HBNBCommand.do_destroy(self, argument)
+        elif class_part in all_classes and "update" in function:
+            '''we must separate the arguments'''
+            function = function.split("(")
+            function = function.pop(1)
+            function = function[:-1]
+            function = function.split(", ")
+            '''id split'''
+            id_k = function[0]
+            '''attr_name split'''
+            attr_name = function[1]
+            '''attr_value split'''
+            value = function[2]
+            argument = class_part + " " + id_k + " " + attr_name + " " + value
+            HBNBCommand.do_update(self, argument)
 
 
 if __name__ == '__main__':
