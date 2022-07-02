@@ -82,7 +82,7 @@ class TestAirbnb_Storage(unittest.TestCase):
                       models.storage.all().keys())
 
     def test_save_instance(self):
-        '''Test saving instances into a json file'''
+        '''Test saving instances in a json file'''
         b = BaseModel()
         s = State()
         c = City()
