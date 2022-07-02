@@ -183,6 +183,13 @@ class HBNBCommand(cmd.Cmd):
             HBNBCommand.do_all(self, class_part)
         elif class_part in all_classes and function == "count()":
             HBNBCommand.do_count(self, class_part)
+        elif class_part in all_classes and "show" in function:
+            '''we must capture the id in order to pass it with the class'''
+            id_key = function.split("(")
+            id_k = id_key[1]
+            id_ke = id_k[:-1]
+            argument = class_part + " " + id_ke
+            HBNBCommand.do_show(self, argument)
 
 
 if __name__ == '__main__':
