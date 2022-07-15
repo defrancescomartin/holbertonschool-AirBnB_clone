@@ -39,4 +39,3 @@
 * 17 - Write a function that finds the sibling of a node
 
 * 18 - Write a function that finds the uncle of a node
-* 
